@@ -1,37 +1,38 @@
 export default async function handler(req, res) {
-    // pilih akun berdasarkan query ?acc=1 atau ?acc=2
-    const acc = req.query.acc;
+  const acc = req.query.acc;
 
-    const accounts = {
-        "1": {
-            email: "aseplogimaja@comfythings.com",
-            pass: "aseplogimaja"
-        },
-        "2": {
-            email: "EMAIL_ASLI_2",
-            pass: "PASSWORD_ASLI_2"
-        }
-    };
-
-    const selected = accounts[acc];
-
-    if (!selected) {
-        return res.status(400).json({ error: "Akun tidak ditemukan" });
+  // Ambil data dari environment variables (AMAN)
+  const accounts = {
+    "1": {
+      email: aseplogimaja@comfythings.com,
+      pass: aseplogimaja
+    },
+    "2": {
+      email: process.env.ACC2_EMAIL,
+      pass: process.env.ACC2_PASS
     }
+  };
 
-    let response = await fetch("https://api.mail.tm/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            address: selected.email,
-            password: selected.pass
-        })
-    });
+  const selected = accounts[acc];
 
-    let data = await response.json();
+  if (!selected || !selected.email || !selected.pass) {
+    return res.status(400).json({ error: "Akun tidak ditemukan atau env vars belum dibuat." });
+  }
 
-    // Simpan token di server (tidak terlihat user)
-    global.token = data.token;
+  const r = await fetch("https://api.mail.tm/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      address: selected.email,
+      password: selected.pass
+    })
+  });
 
-    return res.status(200).json({ status: "OK" });
+  const data = await r.json();
+
+  if (!data.token) {
+    return res.status(500).json({ error: "Login gagal ke Mail.tm", detail: data });
+  }
+
+  return res.status(200).json({ token: data.token });
 }
