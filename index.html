@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Inbox Viewer</title>
+<style>
+body { font-family: Arial; background: #eef1f5; padding: 20px; }
+.container {
+    max-width: 500px; margin: auto; background: white;
+    padding: 20px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+select, input, button {
+    width: 100%; padding: 10px; margin-top: 10px; font-size: 16px;
+}
+button {
+    background:#4a6cf7; color:white; border:none; border-radius:5px; cursor:pointer;
+}
+.email-item {
+    background:#f2f2f2; padding:10px; border-radius:5px; margin-top:10px; cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Pilih Email</h2>
+
+    <select id="emailSelect">
+        <option value="ynya8kaliv@gmail.com">ynya8kaliv@gmail.com</option>
+    </select>
+
+    <input id="fakePassword" value="SENSOR" readonly>
+
+    <button onclick="startLogin()">Lanjut</button>
+
+    <div id="viewer" style="display:none;">
+        <h3>Token:</h3>
+        <input id="token" readonly value="SENSOR">
+
+        <button onclick="loadInbox()">Load Inbox</button>
+
+        <h3>Inbox:</h3>
+        <div id="inbox"></div>
+
+        <div id="emailContent" style="display:none; background:#fff7cc; padding:15px; margin-top:20px; border-radius:8px;"></div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
