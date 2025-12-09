@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Multi Email Viewer</title>
+<title>Multi Email Inbox Viewer</title>
 <style>
 body { font-family: Arial; background:#eef1f5; padding:20px; }
 .container {
@@ -13,8 +13,7 @@ select, button {
     width:100%; padding:10px; margin-top:10px; font-size:16px;
 }
 .email-item {
-    background:#f2f2f2; padding:10px; border-radius:5px;
-    margin-top:10px; cursor:pointer;
+    background:#f2f2f2; padding:10px; margin-top:10px; border-radius:5px; cursor:pointer;
 }
 </style>
 </head>
@@ -31,13 +30,11 @@ select, button {
 
     <button onclick="loginSelected()">Lihat Inbox</button>
 
-    <div id="viewer" style="display:none;">
-
+    <div id="viewer" style="display:none; margin-top:20px;">
         <h3>Inbox:</h3>
         <div id="inbox"></div>
 
-        <div id="emailContent" style="display:none; background:#fff7cc; padding:15px; margin-top:20px; border-radius:8px;"></div>
-
+        <div id="emailContent" style="display:none; background:#fff3af; padding:15px; margin-top:20px; border-radius:8px;"></div>
     </div>
 
 </div>
